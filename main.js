@@ -60,7 +60,7 @@ function clear() {
     ctx.clearRect(x, y, heigth, width);
 
   }
-
+ 
 }
 
 document.addEventListener('keydown', function(event) {
