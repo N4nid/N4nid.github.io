@@ -81,7 +81,7 @@ document.addEventListener('keydown', function(event) {
   }
   if (event.key == "s") {
     //console.log("yoo");
-    if(y > document.getElementById("cv").clientHeight - (speed+5)){
+    if(y < document.getElementById("cv").clientHeight - (speed+5)){
       clear();
       y+=speed;
       draw();
@@ -90,7 +90,7 @@ document.addEventListener('keydown', function(event) {
     
   }
   if (event.key == "d") {
-    if(x > document.getElementById("cv").width - (speed+5)){
+    if(x < document.getElementById("cv").width - (speed+5)){
       clear();
       x += speed;
       draw();
