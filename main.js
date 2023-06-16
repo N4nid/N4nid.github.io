@@ -12,9 +12,10 @@ let pWidth = 20;
 let pHeigth = pWidth;
 let width = 10;
 let heigth = width;
-let doBounce = false;
-let liveTime = 100;
+let boom = false;
+let liveTime = 75;
 let canShoot = true;
+let i = false;
 
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
@@ -23,11 +24,11 @@ function sleep(ms) {
 async function bounce(){
   x = xp;
   y = yp
-  i = 0;
+  j = 0;
   //console.log(document.getElementById("cv").clientHeight - heigth);
   if(canShoot){
     canShoot = false;
-    while (i < liveTime) {
+    while (j < liveTime && !boom) {
     
       if (x == 0) {
         xM = xM * -1;
@@ -47,12 +48,16 @@ async function bounce(){
       y += yM;
       draw(heigth, width, x, y);
     
-      await sleep(50);
-      i++;
+      await sleep(25);
+      j++;
     }
   }
   canShoot = true;
   clear(heigth,width,x,y);
+  clear(pHeigth,pWidth,xp,yp);
+  draw(pHeigth,pWidth,x,y);
+  xp = x;
+  yp = y;
 }
 
 function draw(h,w,x,y){
@@ -75,13 +80,30 @@ function clear(h,w,x,y) {
 
 }
 
+function displayD(){
+  draw(pHeigth,pWidth,xp,yp);
+  if(xM > 0 && yM > 0){
+    clear((pWidth/2),(pHeigth/2),xp,yp);
+    clear(xp,yp,(pWidth/2),(pHeigth/2));
+  }else if (xM < 0 && yM > 0) {
+    clear((pWidth/2),(pHeigth/2),xp+(pWidth/2),yp);
+  }else if (xM < 0 && yM < 0) {
+    clear((pWidth/2),(pHeigth/2),xp+(pWidth/2),yp+(pWidth/2));
+  }else{
+    clear((pWidth/2),(pHeigth/2),xp,yp+(pWidth/2));
+  }
+}
+
+
 document.addEventListener('keydown', function(event) {
+  
   if (event.key == "w") {
    if(yp > 0){
     clear(pHeigth,pWidth,xp,yp);
     yp -= speed;
     draw(pHeigth,pWidth,xp,yp); 
    }
+   displayD();
   }
   if (event.key == "a") {
     if(xp > 0){
@@ -89,34 +111,60 @@ document.addEventListener('keydown', function(event) {
       xp -= speed;
       draw(pHeigth,pWidth,xp,yp);
     }
-    
+    displayD();
   }
   if (event.key == "s") {
     //console.log("yoo");
-    if(yp < document.getElementById("cv").clientHeight - (heigth+5)){
+    if(yp < document.getElementById("cv").clientHeight - (pHeigth+5)){
       clear(pHeigth,pWidth,xp,yp);
       yp+=speed;
       draw(pHeigth,pWidth,xp,yp);
     }
-    
+    displayD();
     
   }
   if (event.key == "d") {
-    if(xp < document.getElementById("cv").width - (width+5)){
+    if(xp < document.getElementById("cv").width - (pWidth+5)){
       clear(pHeigth,pWidth,xp,yp);
       xp += speed;
       draw(pHeigth,pWidth,xp,yp);
       
     }
+    displayD();
     
   }
   
   if(event.key == " "){
     if(canShoot){
+      boom = false;
       bounce();
+    }else{
+      boom = true;
     }
     
   }
-
+  
+  if(event.key == "q" && canShoot){
+    if(i){
+      xM = xM*-1;
+      i = false;
+    }else{
+      yM = yM*-1;
+      i = true;
+    }
+    
+    displayD();
+  }
+  
+  if (event.key == "e" && canShoot) {
+    if (i) {
+      yM = yM * -1;
+      i = false;
+    } else {
+      xM = xM * -1;
+      i = true;
+    }
+    displayD();
+  }
 
 });
