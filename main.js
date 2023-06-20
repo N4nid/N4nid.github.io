@@ -19,7 +19,7 @@ let pHeigth = pWidth;
 let width = 10;
 let heigth = width;
 let boom = false;
-let liveTime = 100;
+//let liveTime = 100;
 let canShoot = true;
 let i = false;
 
@@ -34,7 +34,7 @@ async function bounce(){
   //console.log(document.getElementById("cv").clientHeight - heigth);
   if(canShoot){
     canShoot = false;
-    while (j < liveTime && !boom) {
+    while (!boom) {
     
       if (x == 0) {
         xM = xM * -1;
@@ -55,7 +55,6 @@ async function bounce(){
       draw(heigth, width, x, y);
     
       await sleep(25);
-      j++;
     }
   }
   canShoot = true;
