@@ -4,6 +4,9 @@ document.getElementById("btn").onclick = function fun(){
     xp = 0;
     yp = 0;
     draw(pHeigth,pWidth,xp,yp);
+    xM = speed;
+    yM = xM;
+    displayD();
     bounce();
   }
   
