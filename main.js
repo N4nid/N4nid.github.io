@@ -1,18 +1,13 @@
-document.getElementById("btn").onclick = function fun(){
-  if(canShoot){
-    clear(pHeigth,pWidth,xp,yp);
-    xp = 0;
-    yp = 0;
-    draw(pHeigth,pWidth,xp,yp);
-    xM = speed;
-    yM = xM;
-    displayD();
-    bounce();
-  }
-  
+
+function init() {
+  const canvas = document.getElementById("cv");
+  var ctx = canvas.getContext("2d");;
+  ctx.canvas.width  = window.innerWidth;
+  ctx.canvas.height = window.innerHeight;
+
 }
 
-let speed = 10;
+let speed = 20;
 let xp = speed;
 let yp = speed;
 let xM = speed;
@@ -57,7 +52,7 @@ async function bounce(){
       y += yM;
       draw(heigth, width, x, y);
     
-      await sleep(25);
+      await sleep(15);
     }
   }
   canShoot = true;
