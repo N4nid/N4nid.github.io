@@ -19,7 +19,7 @@ let pHeigth = pWidth;
 let width = 10;
 let heigth = width;
 let boom = false;
-let liveTime = -1;
+let liveTime = 100;
 let canShoot = true;
 let i = false;
 
