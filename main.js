@@ -1,6 +1,12 @@
 document.getElementById("btn").onclick = function fun(){
-  console.log("yoo");
-  bounce();
+  if(canShoot){
+    clear(pHeigth,pWidth,xp,yp);
+    xp = 0;
+    yp = 0;
+    draw(pHeigth,pWidth,xp,yp);
+    bounce();
+  }
+  
 }
 
 let speed = 10;
@@ -13,7 +19,7 @@ let pHeigth = pWidth;
 let width = 10;
 let heigth = width;
 let boom = false;
-let liveTime = 75;
+let liveTime = -1;
 let canShoot = true;
 let i = false;
 
@@ -165,6 +171,13 @@ document.addEventListener('keydown', function(event) {
       i = true;
     }
     displayD();
+  }
+  
+  if(event.key == "r" && canShoot){
+    clear(pHeigth,pWidth,xp,yp);
+    xp = 0;
+    yp = 0;
+    draw(pHeigth,pWidth,xp,yp);
   }
 
 });
