@@ -1,15 +1,7 @@
-
-function init() {
-  const canvas = document.getElementById("cv");
-  var ctx = canvas.getContext("2d");;
-  ctx.canvas.width  = window.innerWidth;
-  ctx.canvas.height = window.innerHeight;
-
-}
-
-let speed = 20;
-let xp = speed;
-let yp = speed;
+let textI = document.getElementById("speed");
+let speed = parseFloat(textI.value);
+let xp = 0;
+let yp = 0;
 let xM = speed;
 let yM = xM;
 let pWidth = 20;
@@ -20,6 +12,21 @@ let boom = false;
 //let liveTime = 100;
 let canShoot = true;
 let i = false;
+
+
+function init() {
+  const canvas = document.getElementById("cv");
+  var ctx = canvas.getContext("2d");
+  ctx.canvas.width  = (window.innerWidth-(window.innerWidth/50));
+  ctx.canvas.height = (window.innerHeight-(window.innerHeight/50));
+
+}
+function setSpeed(){
+  speed = parseFloat(textI.value);22
+  xM = speed;
+  yM = xM;
+
+}
 
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
@@ -52,7 +59,7 @@ async function bounce(){
       y += yM;
       draw(heigth, width, x, y);
     
-      await sleep(15);
+      await sleep(20);
     }
   }
   canShoot = true;
@@ -118,7 +125,7 @@ document.addEventListener('keydown', function(event) {
   }
   if (event.key == "s") {
     //console.log("yoo");
-    if(yp < document.getElementById("cv").clientHeight - (pHeigth+5)){
+    if(yp < document.getElementById("cv").clientHeight - (speed)){
       clear(pHeigth,pWidth,xp,yp);
       yp+=speed;
       draw(pHeigth,pWidth,xp,yp);
@@ -127,7 +134,7 @@ document.addEventListener('keydown', function(event) {
     
   }
   if (event.key == "d") {
-    if(xp < document.getElementById("cv").width - (pWidth+5)){
+    if(xp < document.getElementById("cv").width - (speed)){
       clear(pHeigth,pWidth,xp,yp);
       xp += speed;
       draw(pHeigth,pWidth,xp,yp);
