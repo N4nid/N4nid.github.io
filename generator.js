@@ -8,6 +8,7 @@ let numString;
 let color = [];
 let mult = 7;
 let pattern = [];
+let nijlo = [];
 
 
 //Functons
@@ -16,17 +17,44 @@ function getInput(){
   let goodIN = true;
   let x = tf.value.toLowerCase();
   for(let i = 0; i < x.length; i++){
-    if(!dataString.includes(x.charAt(0))){
+    if(!dataString.includes(x.charAt(0)) || x.includes(" ")){
       goodIN = false;
     }
   }
-  if(goodIN && x.length > 2){
+  if(goodIN && x.length > 2 && x != "nijlo"){
     input = x;
 
     convert();
-  }/*else{
-    alert("FOLLOW THE RULES. please :)");
-  }*/
+  }else if(x == "nijlo"){
+    for(let i = 0; i< 18;i++){
+      nijlo[i] = "black";
+    }
+    nijlo[6] = "white";
+    nijlo[7] = "white";
+    nijlo[12] = "white";
+    nijlo[15] = "white";
+    nijlo[16] = "white";
+    nijlo[17] = "white";
+    nijloD();
+  }
+}
+
+function nijloD(){
+  let x = 0;
+  for(let row = 0;row<6;row++){
+    for(let col = 0;col<3;col++){
+      draw(row,col,nijlo[x]);
+      x++;
+    }
+  }
+
+  for(let row = 5;row>=0;row--){
+    for(let col = 3;col<6;col++){
+      x--;
+      draw(row,col,nijlo[x]);
+
+    }
+  }
 }
 
 function convert(){
@@ -35,7 +63,7 @@ function convert(){
     nums[i] = x;
   }
   numString = nums.join("");
-  color[0] = "rgb("+qsum(numString.length-1)*9.4+","+nums[1]*mult+","+nums[2]*mult+")";
+  color[0] = "rgb("+nums[1]*mult+","+qsum(numString.length-1)*9.4+","+nums[2]*mult+")";
   color[1] = "rgb("+nums[nums.length-1]*mult+","+qsum(2)*9.4+","+(qsum(numString.length-1)*qsum(2))/2.86+")";
 
   patternGen();
