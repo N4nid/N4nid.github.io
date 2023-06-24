@@ -9,7 +9,10 @@ let color = [];
 let mult = 7;
 let pattern = [];
 let nijlo = [];
-
+let delay = 20;
+let slider = document.getElementById("slider");
+let txt = document.getElementById("yoo");
+let tDelay = document.getElementById("delay");
 
 //Functons
 function getInput(){
@@ -39,6 +42,11 @@ function getInput(){
   }
 }
 
+function setDelay(){
+  delay = parseInt(slider.value);
+  tDelay.innerText = "delay: "+delay;
+}
+
 function nijloD(){
   let x = 0;
   for(let row = 0;row<6;row++){
@@ -63,6 +71,7 @@ function convert(){
     nums[i] = x;
   }
   numString = nums.join("");
+  txt.innerText = nums.join(" ");
   color[0] = "rgb("+nums[1]*mult+","+qsum(numString.length-1)*9.4+","+nums[2]*mult+")";
   color[1] = "rgb("+nums[nums.length-1]*mult+","+qsum(2)*9.4+","+(qsum(numString.length-1)*qsum(2))/2.86+")";
 
@@ -82,7 +91,7 @@ function qsum(start){
 function patternGen(){
   let seed = nums.join("");
   while(seed.length < 18){
-    seed =seed+ qsum(numString.length-1).toString() + seed;
+    seed =seed+ seed;//+ qsum(numString.length-1).toString() +
   }
 
   for(let i = 0;i<18;i++){
@@ -108,12 +117,18 @@ function draw(row,col,color){ // 0-5
   ctx.fillRect(x, y, width, height);
 }
 
-function patternDraw(){
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function patternDraw(){
   let x = 0;
+  
     for(let col = 0; col < 3;col++){
       for(let row = 0; row < 6;row++){
         draw(row,col,pattern[x])
         x++;
+        await sleep(delay);
       }
     }
 
@@ -121,6 +136,7 @@ function patternDraw(){
           for(let row = 5; row >= 0;row--){
             x--;
             draw(row,col,pattern[x])
+            await sleep(delay);
         }
     }
 }

@@ -22,7 +22,7 @@ function init() {
 
 }
 function setSpeed(){
-  speed = parseFloat(textI.value);22
+  speed = parseFloat(textI.value);
   xM = speed;
   yM = xM;
 
