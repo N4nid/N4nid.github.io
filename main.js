@@ -40,7 +40,7 @@ async function bounce(){
   if(canShoot){
     canShoot = false;
     while (!boom) {
-    
+
       if (x == 0) {
         xM = xM * -1;
       }
@@ -53,12 +53,12 @@ async function bounce(){
       else if (y > document.getElementById("cv").clientHeight - (heigth + 5)) {
         yM = yM * -1;
       }
-    
+
       clear(heigth, width, x, y);
       x += xM;
       y += yM;
       draw(heigth, width, x, y);
-    
+
       await sleep(20);
     }
   }
@@ -75,9 +75,9 @@ function draw(h,w,x,y){
   if(canvas.getContext){
     const ctx = canvas.getContext("2d");
     ctx.fillRect(x,y,h,w);
-    
+
   }
-  
+
 }
 
 function clear(h,w,x,y) {
@@ -106,12 +106,12 @@ function displayD(){
 
 
 document.addEventListener('keydown', function(event) {
-  
+
   if (event.key == "w") {
    if(yp > 0){
     clear(pHeigth,pWidth,xp,yp);
     yp -= speed;
-    draw(pHeigth,pWidth,xp,yp); 
+    draw(pHeigth,pWidth,xp,yp);
    }
    displayD();
   }
@@ -131,19 +131,19 @@ document.addEventListener('keydown', function(event) {
       draw(pHeigth,pWidth,xp,yp);
     }
     displayD();
-    
+
   }
   if (event.key == "d") {
     if(xp < document.getElementById("cv").width - (speed)){
       clear(pHeigth,pWidth,xp,yp);
       xp += speed;
       draw(pHeigth,pWidth,xp,yp);
-      
+
     }
     displayD();
-    
+
   }
-  
+
   if(event.key == " "){
     if(canShoot){
       boom = false;
@@ -151,9 +151,9 @@ document.addEventListener('keydown', function(event) {
     }else{
       boom = true;
     }
-    
+
   }
-  
+
   if(event.key == "q" && canShoot){
     if(i){
       xM = xM*-1;
@@ -162,10 +162,10 @@ document.addEventListener('keydown', function(event) {
       yM = yM*-1;
       i = true;
     }
-    
+
     displayD();
   }
-  
+
   if (event.key == "e" && canShoot) {
     if (i) {
       yM = yM * -1;
@@ -176,7 +176,7 @@ document.addEventListener('keydown', function(event) {
     }
     displayD();
   }
-  
+
   if(event.key == "r" && canShoot){
     clear(pHeigth,pWidth,xp,yp);
     xp = 0;
