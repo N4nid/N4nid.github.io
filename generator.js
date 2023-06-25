@@ -85,7 +85,7 @@ function convert(){
   txt.innerText = nums.join(" ");
   color[0] = "rgb("+nums[1]*mult+","+qsum(numString.length-1)*9.4+","+nums[2]*mult+")";
   color[1] = "rgb("+nums[nums.length-1]*mult+","+qsum(2)*9.4+","+(qsum(numString.length-1)*qsum(2))/2.86+")";
-
+  
   patternGen();
 }
 
