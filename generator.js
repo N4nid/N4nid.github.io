@@ -11,8 +11,13 @@ let pattern = [];
 let nijlo = [];
 let delay = 20;
 let slider = document.getElementById("slider");
+let sizeS = document.getElementById("size");
 let txt = document.getElementById("yoo");
 let tDelay = document.getElementById("delay");
+let tSize = document.getElementById("tSize");
+let size = 6;
+let mirror = true;
+let wiHi = document.getElementById("cv").width; // width and hight
 
 //Functons
 function getInput(){
@@ -45,6 +50,12 @@ function getInput(){
 function setDelay(){
   delay = parseInt(slider.value);
   tDelay.innerText = "delay: "+delay;
+}
+
+function setSize(){
+  size = parseInt(sizeS.value);
+  tSize.innerText = "size: "+size;
+  getInput();
 }
 
 function nijloD(){
@@ -90,11 +101,11 @@ function qsum(start){
 
 function patternGen(){
   let seed = nums.join("");
-  while(seed.length < 18){
+  while(seed.length < (size*size)){
     seed =seed+ seed;//+ qsum(numString.length-1).toString() +
   }
 
-  for(let i = 0;i<18;i++){
+  for(let i = 0;i<(size*size);i++){
     let x = parseInt(seed.charAt(i));
     if(x % 2 == 0 || x == 8){
       pattern[i] = color[1];
@@ -107,7 +118,7 @@ function patternGen(){
 }
 
 function draw(row,col,color){ // 0-5
-  let width = 100;
+  let width = wiHi/size;
   let height = width;
   let x = width * col;
   let y = width * row;
@@ -123,22 +134,39 @@ function sleep(ms) {
 
 async function patternDraw(){
   let x = 0;
-  
-    for(let col = 0; col < 3;col++){
-      for(let row = 0; row < 6;row++){
+  if(mirror){
+    for(let col = 0; col < size/2;col++){
+      for(let row = 0; row < size;row++){
         draw(row,col,pattern[x])
         x++;
-        await sleep(delay);
+        if(delay != 0){
+          await sleep(delay);
+        }
       }
     }
 
-    for(let col = 3; col < 6;col++){
-          for(let row = 5; row >= 0;row--){
+    for(let col = size/2; col < size;col++){
+          for(let row = size-1; row >= 0;row--){
             x--;
             draw(row,col,pattern[x])
-            await sleep(delay);
+            if(delay != 0){
+              await sleep(delay);
+            }
+            
         }
     }
+  }else{
+    for(let col = 0; col < size;col++){
+      for(let row = 0; row < size;row++){
+        draw(row,col,pattern[x])
+        x++;
+        if(delay != 0){
+          await sleep(delay);
+        }
+      }
+    }
+  }
+    
 }
 
 function joke(){

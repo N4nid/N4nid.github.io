@@ -20,12 +20,15 @@
   <a href="index.html">cool stuff</a>
   <input type="button" id="btn" value="doStuff();" onclick="joke()">
   <input type="text" id="tf" oninput="getInput()">
+  <input type="checkbox" id="mirror" name="mirror" value="mirror" onchange='mirror=this.checked;'checked>
+  <label for="mirror"> do mirror</label><br>
   <p></p>
   
   <canvas height="600px" width="600px" id="cv" style="border: 1px solid black"></canvas>
   <p id="delay">delay: 20</p>
   <input type="range" min="0" max="300" value="20" oninput="setDelay()" class="slider" id="slider">
-
+  <p id="tSize">size: 6</p>
+  <input type="range" min="1" max="100" value="6" oninput="setSize()" class="slider" id="size">
   <!-- Project -->
   <script src="generator.js"></script>
 </body>
